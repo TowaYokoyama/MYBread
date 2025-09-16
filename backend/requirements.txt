@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+pydantic-settings
+email-validator
+
+# For security and authentication
+passlib[bcrypt]
+python-jose[cryptography]
+python-multipart
+
+# For database
+SQLAlchemy
+psycopg2-binary
+alembic

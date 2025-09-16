@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - db
+      - cache
+    environment:
+      - DATABASE_URL=postgresql://user:password@db/pankitchen
+      - REDIS_URL=redis://cache
+
+  db:
+    image: postgres:13
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=pankitchen
+    ports:
+      - "5433:5432"
+
+  cache:
+    image: redis:6.2
+
+volumes:
+  postgres_data:
